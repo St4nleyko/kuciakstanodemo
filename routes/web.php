@@ -27,6 +27,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/roles', [RoleController::class,'index'])->name('role');
 Route::get('/home', [HomeController::class,'index'])->name('home');
 
+
+
+Route::get('/myprofile', [UserController::class,'myProfile'])->name('myprofile');
+Route::post('/updatemyprofile/{id}', [UserController::class,'updateMyProfile'])->name('update.myprofile');
+
+
 Route::group(['middleware' => ['role:superAdmin']], function () {
 //roles
 Route::get('/addrole', [RoleController::class,'addRole'])->name('add.role');

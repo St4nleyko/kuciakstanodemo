@@ -30,14 +30,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-                      <li class="nav-item">
-                          <a class="nav-link" href="{{ route('role') }}">{{ __('Role') }}</a>
-                      </li>
-                        @role('superAdmin')
-                        <!-- only admin links here -->
+                      @role('superAdmin')
+                      <!-- only admin links here -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('role') }}">{{ __('Role') }}</a>
+                        </li>
                         <a class="nav-link" href="{{ route('index.user') }}">{{ __('Users') }}</a>
 
-                        @endrole
+                      @endrole
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -66,6 +66,9 @@
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('myprofile') }}">
+                                        {{ __('My profile') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

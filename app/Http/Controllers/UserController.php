@@ -85,4 +85,42 @@ class UserController extends Controller
       return redirect('/users')->with('success', 'User is successfully created');
 
     }
+
+    public function myProfile()
+    {
+      $user=User::findOrFail(Auth::id());
+      return view('myProfile', compact('user'));
+    }
+
+    public function updateMyProfile(Request $request, $id)
+    {
+      $validatedData = $request->validate([
+       'name' => 'required|max:255',
+     ]);
+      $user = User::find($id);
+      $data = $request->all();
+
+      if(isset($data['password'])) {
+        $this->validate($request, [
+          'old_password' => 'required',
+          'password' => 'different:old_password',
+        ]);
+        if (Hash::check($data['old_password'], $user->password)) {
+          $data['password']=Hash::make($data['password']);
+
+          $user->update($data);
+          return redirect('/myprofile')->with('success', 'Your profile is successfully updated');
+        }
+        else {
+          return redirect('/myprofile')->with('error', 'Invalid old password');
+        }
+      }
+
+      else{
+        unset($data['password']);
+        unset($data['old_password']);
+        $user->update($data);
+        return redirect('/myprofile')->with('success', 'Your profile is successfully updated');
+      }
+    }
 }
