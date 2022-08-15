@@ -39,14 +39,16 @@
                   @endif
                 </td>
                 <td>
-                  <div class="btn-group create-form" >
-                    <a href="{{ route('edit.user',$user->id)}}" class="btn btn-info " >{{ __('Edit') }}</a>
-                    <form action="{{ route('delete.user', $user->id)}}" method="post">
-                      @csrf
-                      @method('POST')
-                      <button class="btn btn-danger " type="submit">{{ __('Delete') }}</button>
-                    </form>
-                  </div>
+                  @if($user->id != 1 || Auth::user()->id == 1)
+                    <div class="btn-group create-form" >
+                      <a href="{{ route('edit.user',$user->id)}}" class="btn btn-info " >{{ __('Edit') }}</a>
+                      <form action="{{ route('delete.user', $user->id)}}" method="post">
+                        @csrf
+                        @method('POST')
+                        <button class="btn btn-danger " type="submit">{{ __('Delete') }}</button>
+                      </form>
+                    </div>
+                  @endif
                 </td>
               </tr>
             @endforeach

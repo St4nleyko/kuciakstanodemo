@@ -35,8 +35,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('role') }}">{{ __('Role') }}</a>
                         </li>
+                      @endrole
+                      @role('superAdmin||admin')
                         <a class="nav-link" href="{{ route('index.user') }}">{{ __('Users') }}</a>
-
                       @endrole
                     </ul>
 

@@ -41,13 +41,14 @@ Route::get('/editrole/{id}', [RoleController::class,'editRole'])->name('edit.rol
 Route::post('/updaterole/{id}', [RoleController::class,'updateRole'])->name('update.role');
 Route::post('/deleterole/{id}', [RoleController::class,'deleteRole'])->name('delete.role');
 
-//users
-Route::get('/users', [UserController::class,'indexUser'])->name('index.user');
-Route::get('/edituser/{id}', [UserController::class,'editUser'])->name('edit.user');
-Route::post('/updateuser/{id}', [UserController::class,'updateUser'])->name('update.user');
-Route::post('/deleteuser/{id}', [UserController::class,'deleteUser'])->name('delete.user');
-Route::get('/createuser', [UserController::class,'createUser'])->name('create.user');
-Route::post('/storeuser', [UserController::class,'storeUser'])->name('store.user');
+});
+Route::group(['middleware' => ['role:superAdmin|admin']], function () {
 
-
+  //users
+  Route::get('/users', [UserController::class,'indexUser'])->name('index.user');
+  Route::get('/edituser/{id}', [UserController::class,'editUser'])->name('edit.user');
+  Route::post('/updateuser/{id}', [UserController::class,'updateUser'])->name('update.user');
+  Route::post('/deleteuser/{id}', [UserController::class,'deleteUser'])->name('delete.user');
+  Route::get('/createuser', [UserController::class,'createUser'])->name('create.user');
+  Route::post('/storeuser', [UserController::class,'storeUser'])->name('store.user');
 });

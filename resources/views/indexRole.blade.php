@@ -26,7 +26,7 @@
                 <td>{{$role->id}}</td>
                 <td>{{$role->name}}</td>
                 <td>
-                  @if($role->name != "superAdmin")
+                  @if($role->name != "superAdmin" && $role->name != "admin")
                     <div class="btn-group create-form" >
                       <a href="{{ route('edit.role',$role->id)}}" class="btn btn-info " >{{ __('Edit') }}</a>
                       <form action="{{ route('delete.role', $role->id)}}" method="post">
