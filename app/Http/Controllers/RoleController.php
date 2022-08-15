@@ -30,15 +30,9 @@ class RoleController extends Controller
     public function index()
     {
       $user = Auth::user();
-      $adminRole = Role::where('name','superAdmin')->first();
       $isSuperAdmin = $user->hasRole('superAdmin');
-      if (!$adminRole){
-        Role::create(['name'=>'superAdmin']);
-        $user->assignRole('superAdmin');
-        $roles= Role::get();
-        return view('indexRole', compact('roles'));
-      }
-      elseif($isSuperAdmin){
+
+      if($isSuperAdmin){
         $roles= Role::get();
         return view('indexRole', compact('roles'));
       }

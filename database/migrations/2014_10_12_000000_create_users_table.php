@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\User;
 
 return new class extends Migration
 {
@@ -22,8 +23,16 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+        $this->insertDataIntoUser('superAdmin', 'system@ithelps.sk','$2y$10$ga0dYBl2fsiri6djColCL.3WwoSXkhkvMtGrTKbxSgvTRl1ZXQRFC');
     }
 
+    private function insertDataIntoUser($name,$email,$pass)  {
+      $user = new User();
+      $user->setAttribute('name', $name);
+      $user->setAttribute('email', $email);
+      $user->setAttribute('password', $pass);
+      $user->save();
+    }
     /**
      * Reverse the migrations.
      *
